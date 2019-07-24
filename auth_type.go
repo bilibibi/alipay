@@ -97,20 +97,22 @@ func (this UserAuthTokenQuery) APIName() string {
 
 func (this UserAuthTokenQuery) Params() map[string]string {
 	var m = make(map[string]string)
+	if this.Code == "" {
+		m["refresh_token"] = this.RefreshToken
+		m["grant_type"] = "refresh_token"
+	} else {
+		m["code"] = this.Code
+		m["grant_type"] = "authorization_code"
+	}
 	return m
 }
 
 func (this UserAuthTokenQuery) ExtJSONParamName() string {
-	return "biz_content"
+	return ""
 }
 
 func (this UserAuthTokenQuery) ExtJSONParamValue() string {
-	if this.Code == "" {
-		this.GrantType = "refresh_token"
-	} else {
-		this.GrantType = "authorization_code"
-	}
-	return Marshal(this)
+	return ""
 }
 
 type UserAuthTokenRsp struct {
