@@ -24,3 +24,12 @@ func (this *Client)AgentMiniCreate(param AgentMiniCreateQuery) (results *AgentMi
 	return results, err
 }
 
+func (this *Client)AgentMiniModify(param AgentMiniCreateQuery) (results *AgentMiniModifyRsp, err error) {
+	files := map[string]string {
+		"app_logo": param.AppLogo,
+	}
+	err = this.doRequestWithFile("POST", param,  files, &results)
+	return results, err
+}
+
+

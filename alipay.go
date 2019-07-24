@@ -178,16 +178,18 @@ func (this *Client) doRequestWithFile(method string, param Param, files map[stri
 
 	for name, path := range files {
 
-		file, err := os.Open(path)
-		if err != nil {
+		file, err1 := os.Open(path)
+		if err1 != nil {
+			err = err1
 			return
 		}
 
 		defer file.Close()
 
-		part, err := writer.CreateFormFile(name, filepath.Base(path))
-		if err != nil {
-			return  err
+		part, err2 := writer.CreateFormFile(name, filepath.Base(path))
+		if err2 != nil {
+			err = err2
+			return
 		}
 
 		_, err = io.Copy(part, file)
