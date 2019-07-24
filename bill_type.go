@@ -22,7 +22,7 @@ func (this BillDownloadURLQuery) ExtJSONParamName() string {
 }
 
 func (this BillDownloadURLQuery) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type BillDownloadURLQueryRsp struct {

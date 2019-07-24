@@ -107,7 +107,7 @@ func (this TradeQuery) ExtJSONParamName() string {
 }
 
 func (this TradeQuery) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type TradeQueryRsp struct {
@@ -199,7 +199,7 @@ func (this TradeClose) ExtJSONParamName() string {
 }
 
 func (this TradeClose) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type TradeCloseRsp struct {
@@ -243,7 +243,7 @@ func (this TradeRefund) ExtJSONParamName() string {
 }
 
 func (this TradeRefund) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type TradeRefundRsp struct {
@@ -302,7 +302,7 @@ func (this TradeFastPayRefundQuery) ExtJSONParamName() string {
 }
 
 func (this TradeFastPayRefundQuery) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type TradeFastPayRefundQueryRsp struct {
@@ -353,7 +353,7 @@ func (this TradeOrderSettle) ExtJSONParamName() string {
 }
 
 func (this TradeOrderSettle) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type RoyaltyParameter struct {
@@ -404,7 +404,7 @@ func (this TradeCreate) ExtJSONParamName() string {
 }
 
 func (this TradeCreate) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type TradeCreateRsp struct {
@@ -497,7 +497,7 @@ func (this TradePay) ExtJSONParamName() string {
 }
 
 func (this TradePay) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type TradePayRsp struct {
@@ -554,7 +554,7 @@ func (this TradeAppPay) ExtJSONParamName() string {
 }
 
 func (this TradeAppPay) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 //////////////////////////////////////////////////////////////////////////////////
@@ -584,7 +584,7 @@ func (this TradePreCreate) ExtJSONParamName() string {
 }
 
 func (this TradePreCreate) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type TradePreCreateRsp struct {
@@ -632,7 +632,7 @@ func (this TradeCancel) ExtJSONParamName() string {
 }
 
 func (this TradeCancel) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type TradeCancelRsp struct {
@@ -681,7 +681,7 @@ func (this TradeOrderInfoSync) ExtJSONParamName() string {
 }
 
 func (this TradeOrderInfoSync) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type TradeOrderInfoSyncRsp struct {

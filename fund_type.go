@@ -29,7 +29,7 @@ func (this FundTransToAccountTransfer) ExtJSONParamName() string {
 }
 
 func (this FundTransToAccountTransfer) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 // 单笔转账到支付宝账户接口响应参数
@@ -77,7 +77,7 @@ func (this FundTransOrderQuery) ExtJSONParamName() string {
 }
 
 func (this FundTransOrderQuery) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 // 查询转账订单接口响应参数
@@ -142,7 +142,7 @@ func (this FundAuthOrderVoucherCreate) ExtJSONParamName() string {
 }
 
 func (this FundAuthOrderVoucherCreate) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type FundAuthOrderVoucherCreateRsp struct {
@@ -195,7 +195,7 @@ func (this FundAuthOrderFreeze) ExtJSONParamName() string {
 }
 
 func (this FundAuthOrderFreeze) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type FundAuthOrderFreezeRsp struct {
@@ -245,7 +245,7 @@ func (this FundAuthOrderUnfreeze) ExtJSONParamName() string {
 }
 
 func (this FundAuthOrderUnfreeze) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type FundAuthOrderUnfreezeRsp struct {
@@ -296,7 +296,7 @@ func (this FundAuthOperationCancel) ExtJSONParamName() string {
 }
 
 func (this FundAuthOperationCancel) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type FundAuthOperationCancelRsp struct {
@@ -340,7 +340,7 @@ func (this FundAuthOperationDetailQuery) ExtJSONParamName() string {
 }
 
 func (this FundAuthOperationDetailQuery) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type FundAuthOperationDetailQueryRsp struct {
@@ -412,7 +412,7 @@ func (this FundAuthOrderAppFreeze) ExtJSONParamName() string {
 }
 
 func (this FundAuthOrderAppFreeze) ExtJSONParamValue() string {
-	return marshal(this)
+	return Marshal(this)
 }
 
 type FundAuthOrderAppFreezeRsp struct {

@@ -1,6 +1,7 @@
 package alipay
 
 import (
+	"bytes"
 	"crypto"
 	"crypto/rsa"
 	"encoding/base64"
@@ -8,8 +9,11 @@ import (
 	"errors"
 	"io"
 	"io/ioutil"
+	"mime/multipart"
 	"net/http"
 	"net/url"
+	"os"
+	"path/filepath"
 	"sort"
 	"strings"
 	"time"
@@ -167,8 +171,105 @@ func (this *Client) doRequest(method string, param Param, result interface{}) (e
 	return err
 }
 
+func (this *Client) doRequestWithFile(method string, param Param, files map[string]string, result interface{}) (err error) {
+
+	body := &bytes.Buffer{}
+	writer := multipart.NewWriter(body)
+
+	for name, path := range files {
+
+		file, err := os.Open(path)
+		if err != nil {
+			return
+		}
+
+		defer file.Close()
+
+		part, err := writer.CreateFormFile(name, filepath.Base(path))
+		if err != nil {
+			return  err
+		}
+
+		_, err = io.Copy(part, file)
+	}
+
+   	params, err := this.URLValues(param)
+   	if err != nil {
+   		return
+	}
+
+	for key, val := range params {
+		_ = writer.WriteField(key, val[0])
+	}
+
+	err = writer.Close()
+
+	if err != nil {
+		return  err
+	}
+
+	req, err := http.NewRequest(method, this.apiDomain, body)
+
+	if err != nil {
+		return err
+	}
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+
+	resp, err := this.Client.Do(req)
+	if resp != nil {
+		defer resp.Body.Close()
+	}
+	if err != nil {
+		return err
+	}
+
+	data, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return err
+	}
+
+	if this.aliPublicKey != nil {
+		var dataStr = string(data)
+
+		var rootNodeName = strings.Replace(param.APIName(), ".", "_", -1) + kResponseSuffix
+
+		var rootIndex = strings.LastIndex(dataStr, rootNodeName)
+		var errorIndex = strings.LastIndex(dataStr, kErrorResponse)
+
+		var content string
+		var sign string
+
+		if rootIndex > 0 {
+			content, sign = parserJSONSource(dataStr, rootNodeName, rootIndex)
+		} else if errorIndex > 0 {
+			content, sign = parserJSONSource(dataStr, kErrorResponse, errorIndex)
+		} else {
+			return kSignNotFound
+		}
+
+		if sign == "" {
+			return kSignNotFound
+		}
+
+		if ok, err := verifyData([]byte(content), this.SignType, sign, this.aliPublicKey); ok == false {
+			return err
+		}
+	}
+
+	err = json.Unmarshal(data, result)
+	if err != nil {
+		return err
+	}
+
+	return err
+}
+
 func (this *Client) DoRequest(method string, param Param, result interface{}) (err error) {
 	return this.doRequest(method, param, result)
+}
+
+func (this *Client) DoRequestWithFile(method string, param Param, files map[string]string, result interface{}) (err error) {
+	return this.doRequestWithFile(method, param, files, result)
 }
 
 func (this *Client) VerifySign(data url.Values) (ok bool, err error) {

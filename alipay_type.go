@@ -46,7 +46,7 @@ type Param interface {
 	ExtJSONParamValue() string
 }
 
-func marshal(obj interface{}) string {
+func Marshal(obj interface{}) string {
 	var bytes, err = json.Marshal(obj)
 	if err != nil {
 		return ""
