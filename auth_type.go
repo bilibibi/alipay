@@ -98,7 +98,7 @@ func (this UserAuthTokenQuery) APIName() string {
 
 func (this UserAuthTokenQuery) Params() map[string]string {
 	var m = make(map[string]string)
-	if this.AppAuthToken {
+	if this.AppAuthToken != "" {
 		m["app_auth_token"] = this.AppAuthToken
 	}
 	if this.Code == "" {
