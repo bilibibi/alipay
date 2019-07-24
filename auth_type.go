@@ -120,6 +120,8 @@ type UserAuthTokenRsp struct {
 		SubCode         string `json:"sub_code,omitempty"`
 		SubMsg          string `json:"sub_msg,omitempty"`
 		UserId 			string `json:"user_id"`
+		AccessToken 	string `json:"access_token"`
+		RefreshToken 	string `json:"refresh_token"`
 		ExpiresIn 		int `json:"expires_in"`
 		ReExpiresIn 	int `json:"re_expires_in"`
 	} `json:"alipay_system_oauth_token_response"`

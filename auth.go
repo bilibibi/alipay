@@ -24,7 +24,7 @@ func (this *Client) GetUserAuthToken(param UserAuthTokenQuery) (results *UserAut
 	return results, err
 }
 
-func (this *Client) QueryAuthUserStatus(param UserAuthInfoQuery) (results *UserAuthInfoRsp, err error) {
+func (this *Client) QueryAuthUserInfo(param UserAuthInfoQuery) (results *UserAuthInfoRsp, err error) {
 	err = this.doRequest("POST", param, &results)
 	return results, err
 }
