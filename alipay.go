@@ -163,7 +163,7 @@ func (this *Client) doRequest(method string, param Param, result interface{}) (e
 			return err
 		}
 	}
-
+	fmt.Println(string(data))
 	err = json.Unmarshal(data, result)
 	if err != nil {
 		return err
