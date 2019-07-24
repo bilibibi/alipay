@@ -120,17 +120,20 @@ func (this UserAuthTokenQuery) ExtJSONParamValue() string {
 }
 
 type UserAuthTokenRsp struct {
-	Content struct {
-		Code            string `json:"code"`
-		Msg             string `json:"msg"`
-		SubCode         string `json:"sub_code,omitempty"`
-		SubMsg          string `json:"sub_msg,omitempty"`
+	Content* struct {
 		UserId 			string `json:"user_id"`
+		AlipayUserId 	string `json:"alipay_user_id"`
 		AccessToken 	string `json:"access_token"`
 		RefreshToken 	string `json:"refresh_token"`
 		ExpiresIn 		int `json:"expires_in"`
 		ReExpiresIn 	int `json:"re_expires_in"`
-	} `json:"alipay_system_oauth_token_response"`
+	} `json:"alipay_system_oauth_token_response,omitempty"`
+	ErrorResponse* struct{
+		Code            string `json:"code"`
+		Msg             string `json:"msg"`
+		SubCode         string `json:"sub_code,omitempty"`
+		SubMsg          string `json:"sub_msg,omitempty"`
+	} `json:"error_response,omitempty"`
 	Sign string `json:"sign"`
 }
 
