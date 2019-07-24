@@ -74,7 +74,7 @@ func New(appId, aliPublicKey, privateKey string, isProduction bool) (client *Cli
 
 func (this *Client) URLValues(param Param) (value url.Values, err error) {
 	var p = url.Values{}
-	fmt.Sprintf("%v, %v", p, this)
+	fmt.Printf("%v, %v", p, this)
 	p.Add("app_id", this.appId)
 	p.Add("method", param.APIName())
 	p.Add("format", kFormat)
