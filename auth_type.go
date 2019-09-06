@@ -86,10 +86,10 @@ type OpenAuthStatusRsp struct {
 
 // https://docs.open.alipay.com/api_50/alipay.open.agent.confirm/
 type UserAuthTokenQuery struct {
-	AppAuthToken string `json:"-"` // 如
-	GrantType string `json:"grant_type,omitempty"` // 如果使用app_auth_code换取token，则为authorization_code，如果使用refresh_token换取新的token，则为refresh_token
-	Code 		string `json:"code,omitempty"` // 与refresh_token二选一，用户对应用授权后得到，即第一步中开发者获取到的app_auth_code值
-	RefreshToken 		string `json:"refresh_token,omitempty"` // 与code二选一，可为空，刷新令牌时使用
+	AppAuthToken string `json:"app_auth_token"` // 如
+	GrantType string `json:"grant_type"` // 如果使用app_auth_code换取token，则为authorization_code，如果使用refresh_token换取新的token，则为refresh_token
+	Code 		string `json:"code"` // 与refresh_token二选一，用户对应用授权后得到，即第一步中开发者获取到的app_auth_code值
+	RefreshToken 		string `json:"refresh_token"` // 与code二选一，可为空，刷新令牌时使用
 }
 
 func (this UserAuthTokenQuery) APIName() string {
@@ -101,20 +101,22 @@ func (this UserAuthTokenQuery) Params() map[string]string {
 	if this.AppAuthToken != "" {
 		m["app_auth_token"] = this.AppAuthToken
 	}
+	if this.Code == "" {
+		m["refresh_token"] = this.RefreshToken
+		m["grant_type"] = "refresh_token"
+	} else {
+		m["code"] = this.Code
+		m["grant_type"] = "authorization_code"
+	}
 	return m
 }
 
 func (this UserAuthTokenQuery) ExtJSONParamName() string {
-	return "biz_content"
+	return ""
 }
 
 func (this UserAuthTokenQuery) ExtJSONParamValue() string {
-	if this.Code == "" {
-		this.GrantType = "refresh_token"
-	} else {
-		this.GrantType  = "authorization_code"
-	}
-	return Marshal(this)
+	return ""
 }
 
 type UserAuthTokenRsp struct {

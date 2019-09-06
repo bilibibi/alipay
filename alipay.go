@@ -114,6 +114,7 @@ func (this *Client) doRequest(method string, param Param, result interface{}) (e
 		if err != nil {
 			return err
 		}
+		println(p.Encode())
 		buf = strings.NewReader(p.Encode())
 	}
 
