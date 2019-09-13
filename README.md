@@ -17,9 +17,9 @@ AliPay SDK for Golang
 
 ## 其它支付
 
-微信支付 [https://github.com/smartwalle/wxpay](https://github.com/smartwalle/wxpay)
+微信支付 [https://github.com/charsunny/wxpay](https://github.com/charsunny/wxpay)
 
-PayPal [https://github.com/smartwalle/paypal](https://github.com/smartwalle/paypal)
+PayPal [https://github.com/charsunny/paypal](https://github.com/charsunny/paypal)
 
 ## 已实现接口
 
