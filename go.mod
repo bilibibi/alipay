@@ -1,3 +1,3 @@
-module github.com/smartwalle/alipay
+module github.com/charsunny/alipay
 
 go 1.12
