@@ -27,6 +27,7 @@ var (
 
 type Client struct {
 	appId              string
+	subAppId 		   string
 	apiDomain          string
 	notifyVerifyDomain string
 	appPrivateKey      *rsa.PrivateKey // 应用私钥
@@ -71,10 +72,18 @@ func New(appId, aliPublicKey, privateKey string, isProduction bool) (client *Cli
 	return client, nil
 }
 
+func (this *Client)WithAppId(appId string) (new *Client) {
+	this.subAppId = appId
+	return this
+}
+
 func (this *Client) URLValues(param Param) (value url.Values, err error) {
 	var p = url.Values{}
-	
-	p.Add("app_id", this.appId)
+	if this.subAppId != "" {
+		p.Add("app_id", this.subAppId)
+	} else {
+		p.Add("app_id", this.appId)
+	}
 	p.Add("method", param.APIName())
 	p.Add("format", kFormat)
 	p.Add("charset", kCharset)
