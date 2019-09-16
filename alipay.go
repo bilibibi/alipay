@@ -280,6 +280,20 @@ func (this *Client) VerifySign(data url.Values) (ok bool, err error) {
 	return verifySign(data, this.aliPublicKey)
 }
 
+func (this *Client)DecryptContent(data string) (content map[string]interface{}, err error) {
+	cipherBytes, err := base64.StdEncoding.DecodeString(data)
+	if err != nil {
+		return
+	}
+	if this.SignType == K_SIGN_TYPE_RSA {
+		if bytes, err1 := encoding.RSADecryptPKCS1WithKey(cipherBytes, this.appPrivateKey); err1 == nil {
+			err = json.Unmarshal(bytes, &content)
+			return
+		}
+	}
+	return
+}
+
 func parserJSONSource(rawData string, nodeName string, nodeIndex int) (content string, sign string) {
 	var dataStartIndex = nodeIndex + len(nodeName) + 2
 	var signIndex = strings.LastIndex(rawData, "\""+kSignNodeName+"\"")
