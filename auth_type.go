@@ -35,12 +35,14 @@ type OpenAuthTokenRsp struct {
 		Msg             string `json:"msg"`
 		SubCode         string `json:"sub_code,omitempty"`
 		SubMsg          string `json:"sub_msg,omitempty"`
-		AppAuthToken 	string `json:"app_auth_token"`
-		UserId 			string `json:"user_id"`
-		AuthAppId 		string `json:"auth_app_id"`
-		ExpiresIn 		int `json:"expires_in"`
-		ReExpiresIn 	int `json:"re_expires_in"`
-		AppRefreshToken string `json:"app_refresh_token"`
+		Tokens []struct{
+			AppAuthToken 	string `json:"app_auth_token"`
+			UserId 			string `json:"user_id"`
+			AuthAppId 		string `json:"auth_app_id"`
+			ExpiresIn 		int `json:"expires_in"`
+			ReExpiresIn 	int `json:"re_expires_in"`
+			AppRefreshToken string `json:"app_refresh_token"`
+		} `json:"tokens"`
 	} `json:"alipay_open_auth_token_app_response"`
 	Sign string `json:"sign"`
 }
